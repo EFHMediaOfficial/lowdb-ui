@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LowDB UI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <table class="table table-bordered border-primary table-dark table-striped">
+        <thead>
+            <tr>
+                <th> Key </th>
+                <th> Value </th>
+                <th> Object ? </th>
+                <th> Key </th>
+                <th> Value </th>
+                <th> Array ? </th>
+                <th> Key </th>
+                <th> Value </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(const [key, value] of Object.entries(_data)){ %>
+                <tr>
+                    <td>
+                        <%=key%>
+                    </td>
+                    <td>
+                        <%=value%>
+                        <% if(value.toString()=="[object Object]" ){ %>
+                            <% for(const [_key, _value] of Object.entries(value)){ %>
+                                <td>
+                                    True
+                                </td>
+                                <td>
+                                    <%=_key%>
+                                </td>
+                                <td>
+                                    <%=_value%>
+                                    <% if(_value=="[object Object]" ){ %>
+                                        <% for(const [__key, __value] of Object.entries(_value)){ %>
+                                            <td>
+                                                True
+                                            </td>
+                                            <td>
+                                                <%=__key%>
+                                            </td>
+                                            <td>
+                                                <%=__value%>
+                                            </td>
+                                        <%}%>
+                                    <%} else {%>
+                                        <td>
+                                            False
+                                        </td>
+                                        <td>
+                                            -
+                                        </td>
+                                        <td>
+                                            -
+                                        </td>
+                                    <%}%>
+                                </td>
+
+                            <%}%>
+                        </td>
+                        <%} else {%>
+                            <%=value%>
+                            <td>
+                                False
+                            </td>
+                            <td>
+                                -
+                            </td>
+                            <td>
+                                -
+                            </td>
+                            <td>
+                                False
+                            </td>
+                            <td>
+                                -
+                            </td>
+                            <td>
+                                -
+                            </td>
+                        <%}%>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+
+</html>
